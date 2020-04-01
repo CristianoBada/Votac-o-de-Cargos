@@ -43,7 +43,7 @@ public class EleicaoEndpoint {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<?> salvar( @RequestBody Eleicao eleicao) {
+	public ResponseEntity<?> salvar(@Valid @RequestBody Eleicao eleicao) {
 		return new ResponseEntity<>(eleicaoDOA.save(eleicao), HttpStatus.CREATED);
 	}
 
@@ -55,7 +55,7 @@ public class EleicaoEndpoint {
 	}
 
 	@PutMapping
-	public ResponseEntity<?> editar( @RequestBody Eleicao eleicao) {
+	public ResponseEntity<?> editar(@Valid @RequestBody Eleicao eleicao) {
 		verificaSeEleicaoExiste(eleicao.getId());
 		eleicaoDOA.save(eleicao);
 		return new ResponseEntity<>(HttpStatus.OK);
