@@ -4,24 +4,20 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
-public class Cargo extends AbstractEntity {
+public class Candidato extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
 
 	@NotEmpty
 	private String nome;
 
-	@NotNull
-	@ManyToOne
-	private Eleicao eleicao;
-	
+	private byte[] imagem;
+
 	@ManyToMany
-	private Set<Candidato> candidatos;
+	private Set<Cargo> cargos;
 
 	public String getNome() {
 		return nome;
@@ -31,12 +27,20 @@ public class Cargo extends AbstractEntity {
 		this.nome = nome;
 	}
 
-	public Eleicao getEleicao() {
-		return eleicao;
+	public byte[] getImagem() {
+		return imagem;
 	}
 
-	public void setEleicao(Eleicao eleicao) {
-		this.eleicao = eleicao;
+	public void setImagem(byte[] imagem) {
+		this.imagem = imagem;
+	}
+
+	public Set<Cargo> getCargos() {
+		return cargos;
+	}
+
+	public void setCargos(Set<Cargo> cargos) {
+		this.cargos = cargos;
 	}
 
 }
