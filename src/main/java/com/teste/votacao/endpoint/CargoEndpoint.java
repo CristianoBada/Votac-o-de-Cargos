@@ -16,54 +16,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teste.votacao.error.ResourceNotFoundException;
-import com.teste.votacao.model.Eleicao;
-import com.teste.votacao.repository.EleicaoRepository;
+import com.teste.votacao.model.Cargo;
+import com.teste.votacao.repository.CargoRepository;
 
 @RestController
-@RequestMapping("eleicoes")
-public class EleicaoEndpoint {
-	private final EleicaoRepository eleicaoDOA;
-	
+@RequestMapping("cargos")
+public class CargoEndpoint {
+	private final CargoRepository cargoDOA;
+
 	@Autowired
-	public EleicaoEndpoint(EleicaoRepository eleicaoDOA) {
-		this.eleicaoDOA = eleicaoDOA;
+	public CargoEndpoint(CargoRepository cargoDOA) {
+		this.cargoDOA = cargoDOA;
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<?> listaTudo( ) {
-		return new ResponseEntity<>(eleicaoDOA.findAll(), HttpStatus.OK);
+	public ResponseEntity<?> listaTudo() {
+		return new ResponseEntity<>(cargoDOA.findAll(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping(path = "/{id}")
-	public ResponseEntity<?> getEleicaoPorId(@PathVariable("id") Long id) {
+	public ResponseEntity<?> getCargoPorId(@PathVariable("id") Long id) {
 		verificaSeEleicaoExiste(id);
-		Eleicao eleicao = eleicaoDOA.findById(id).get(); 
-		return new ResponseEntity<>(eleicao, HttpStatus.OK);
+		Cargo cargo = cargoDOA.findById(id).get();
+		return new ResponseEntity<>(cargo, HttpStatus.OK);
 	}
-	
+
 	@PostMapping
 	@Transactional
-	public ResponseEntity<?> salvar(@Valid @RequestBody Eleicao eleicao) {
-		return new ResponseEntity<>(eleicaoDOA.save(eleicao), HttpStatus.CREATED);
+	public ResponseEntity<?> salvar(@Valid @RequestBody Cargo cargo) {
+		return new ResponseEntity<>(cargoDOA.save(cargo), HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletar(@PathVariable Long id) {
 		verificaSeEleicaoExiste(id);
-		eleicaoDOA.deleteById(id);
+		cargoDOA.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@PutMapping
-	public ResponseEntity<?> editar(@Valid @RequestBody Eleicao eleicao) {
-		verificaSeEleicaoExiste(eleicao.getId());
-		eleicaoDOA.save(eleicao);
+	public ResponseEntity<?> editar(@Valid @RequestBody Cargo cargo) {
+		verificaSeEleicaoExiste(cargo.getId());
+		cargoDOA.save(cargo);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
-	//Metodo de validação se existe uma eleição pesquisada
+
+	// Metodo de validação se existe uma eleição pesquisada
 	private void verificaSeEleicaoExiste(Long id) {
-		if (!eleicaoDOA.findById(id).isPresent())
-			throw new ResourceNotFoundException("A eleição com ID: " + id + " não existe");
+		if (!cargoDOA.findById(id).isPresent())
+			throw new ResourceNotFoundException("O cargo com ID: " + id + " não existe");
 	}
 }
