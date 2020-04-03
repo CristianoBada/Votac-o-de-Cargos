@@ -19,7 +19,6 @@ public class Eleitor extends AbstractEntity {
 	@Length(min = 14, max = 14)
 	private String cdf;
 
-	@NotEmpty
 	@Length(min = 19, max = 19)
 	private String protocolo;
 

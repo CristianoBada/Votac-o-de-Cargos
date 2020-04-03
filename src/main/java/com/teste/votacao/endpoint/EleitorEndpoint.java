@@ -45,6 +45,7 @@ private final EleitorRepository eleitorDOA;
 	@PostMapping
 	@Transactional
 	public ResponseEntity<?> salvar(@Valid @RequestBody Eleitor eleitor) {
+		eleitor.setProtocolo(new Protocolo().gerecaoDeCodigoAlfaNumerico());
 		return new ResponseEntity<>(eleitorDOA.save(eleitor), HttpStatus.CREATED);
 	}
 
@@ -58,7 +59,6 @@ private final EleitorRepository eleitorDOA;
 	@PutMapping
 	public ResponseEntity<?> editar(@Valid @RequestBody Eleitor eleitor) {
 		verificaSeEleitorExiste(eleitor.getId());
-		eleitor.setProtocolo(new Protocolo().gerecaoDeCodigoAlfaNumerico());
 		eleitorDOA.save(eleitor);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
