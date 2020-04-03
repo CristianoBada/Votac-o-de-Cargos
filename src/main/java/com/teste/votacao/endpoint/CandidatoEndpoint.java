@@ -36,7 +36,7 @@ public class CandidatoEndpoint {
 
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> getCandidatoPorId(@PathVariable("id") Long id) {
-		verificaSeEleicaoExiste(id);
+		verificaSeCandidatoExiste(id);
 		Candidato candidato = candidatoDOA.findById(id).get();
 		return new ResponseEntity<>(candidato, HttpStatus.OK);
 	}
@@ -49,20 +49,21 @@ public class CandidatoEndpoint {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletar(@PathVariable Long id) {
-		verificaSeEleicaoExiste(id);
+		verificaSeCandidatoExiste(id);
 		candidatoDOA.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@PutMapping
 	public ResponseEntity<?> editar(@Valid @RequestBody Candidato candidato) {
-		verificaSeEleicaoExiste(candidato.getId());
+		verificaSeCandidatoExiste(candidato.getId());
+		candidato.setVotos(0);
 		candidatoDOA.save(candidato);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	// Metodo de validação se existe uma eleição pesquisada
-	private void verificaSeEleicaoExiste(Long id) {
+	// Metodo de validação se existe um candidato pesquisado
+	private void verificaSeCandidatoExiste(Long id) {
 		if (!candidatoDOA.findById(id).isPresent())
 			throw new ResourceNotFoundException("O candidato com ID: " + id + " não existe");
 	}

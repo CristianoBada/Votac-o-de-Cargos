@@ -14,24 +14,27 @@ public class Eleicao extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
 
-	//Nome da eleição
+	// Nome da eleição
 	@NotEmpty
 	private String nome;
 
-	//Data de inicio da eleição
+	// Data de inicio da eleição
 	@Basic
 	@NotNull
 	private Date inicio;
 
-	//Data final da eleição
+	// Data final da eleição
 	@Basic
 	@NotNull
 	private Date fim;
-	
+
 	@OneToMany
 	private Set<Cargo> cargo;
 
-	//Getters e Setters
+	@OneToMany
+	private Set<Eleitor> eleitores;
+
+	// Getters e Setters
 	public String getNome() {
 		return nome;
 	}
@@ -62,6 +65,14 @@ public class Eleicao extends AbstractEntity {
 
 	public void setCargo(Set<Cargo> cargo) {
 		this.cargo = cargo;
+	}
+
+	public Set<Eleitor> getEleitores() {
+		return eleitores;
+	}
+
+	public void setEleitores(Set<Eleitor> eleitores) {
+		this.eleitores = eleitores;
 	}
 
 }

@@ -36,7 +36,7 @@ public class CargoEndpoint {
 
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> getCargoPorId(@PathVariable("id") Long id) {
-		verificaSeEleicaoExiste(id);
+		verificaSeCargoExiste(id);
 		Cargo cargo = cargoDOA.findById(id).get();
 		return new ResponseEntity<>(cargo, HttpStatus.OK);
 	}
@@ -49,20 +49,20 @@ public class CargoEndpoint {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletar(@PathVariable Long id) {
-		verificaSeEleicaoExiste(id);
+		verificaSeCargoExiste(id);
 		cargoDOA.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@PutMapping
 	public ResponseEntity<?> editar(@Valid @RequestBody Cargo cargo) {
-		verificaSeEleicaoExiste(cargo.getId());
+		verificaSeCargoExiste(cargo.getId());
 		cargoDOA.save(cargo);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	// Metodo de validação se existe uma eleição pesquisada
-	private void verificaSeEleicaoExiste(Long id) {
+	// Metodo de validação se existe um cargo pesquisado
+	private void verificaSeCargoExiste(Long id) {
 		if (!cargoDOA.findById(id).isPresent())
 			throw new ResourceNotFoundException("O cargo com ID: " + id + " não existe");
 	}

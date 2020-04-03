@@ -1,10 +1,10 @@
 package com.teste.votacao.model;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
+
+import org.springframework.lang.NonNull;
 
 @Entity
 public class Candidato extends AbstractEntity {
@@ -16,8 +16,11 @@ public class Candidato extends AbstractEntity {
 
 	private byte[] imagem;
 
-	@ManyToMany
-	private Set<Cargo> cargos;
+	@NonNull
+	private Integer votos;
+
+	@ManyToOne
+	private Cargo cargo;
 
 	public String getNome() {
 		return nome;
@@ -35,12 +38,20 @@ public class Candidato extends AbstractEntity {
 		this.imagem = imagem;
 	}
 
-	public Set<Cargo> getCargos() {
-		return cargos;
+	public Cargo getCargo() {
+		return cargo;
 	}
 
-	public void setCargos(Set<Cargo> cargos) {
-		this.cargos = cargos;
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+
+	public Integer getVotos() {
+		return votos;
+	}
+
+	public void setVotos(Integer votos) {
+		this.votos = votos;
 	}
 
 }
