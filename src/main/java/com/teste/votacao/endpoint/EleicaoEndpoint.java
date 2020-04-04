@@ -1,5 +1,7 @@
 package com.teste.votacao.endpoint;
 
+import java.util.Iterator;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.teste.votacao.error.ResourceNotFoundException;
+import com.teste.votacao.model.Candidato;
+import com.teste.votacao.model.Cargo;
 import com.teste.votacao.model.Eleicao;
 import com.teste.votacao.repository.EleicaoRepository;
 

@@ -51,4 +51,8 @@ public class AbstractEntity implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "AbstractEntity [id=" + id + "]";
+	}
 }

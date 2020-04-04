@@ -75,4 +75,8 @@ public class Eleicao extends AbstractEntity {
 		this.eleitores = eleitores;
 	}
 
+	@Override
+	public String toString() {
+		return "Eleicao [nome=" + nome + ", inicio=" + inicio + ", fim=" + fim + "]";
+	}
 }

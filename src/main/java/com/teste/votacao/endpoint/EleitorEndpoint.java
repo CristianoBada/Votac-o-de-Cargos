@@ -23,25 +23,25 @@ import com.teste.votacao.util.Protocolo;
 @RestController
 @RequestMapping("eleitores")
 public class EleitorEndpoint {
-private final EleitorRepository eleitorDOA;
-	
+	private final EleitorRepository eleitorDOA;
+
 	@Autowired
 	public EleitorEndpoint(EleitorRepository eleitorDOA) {
 		this.eleitorDOA = eleitorDOA;
 	}
-	
+
 	@GetMapping
-	public ResponseEntity<?> listaTudo( ) {
+	public ResponseEntity<?> listaTudo() {
 		return new ResponseEntity<>(eleitorDOA.findAll(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> getEleitorPorId(@PathVariable("id") Long id) {
 		verificaSeEleitorExiste(id);
-		Eleitor eleitor = eleitorDOA.findById(id).get(); 
+		Eleitor eleitor = eleitorDOA.findById(id).get();
 		return new ResponseEntity<>(eleitor, HttpStatus.OK);
 	}
-	
+
 	@PostMapping
 	@Transactional
 	public ResponseEntity<?> salvar(@Valid @RequestBody Eleitor eleitor) {
@@ -62,8 +62,8 @@ private final EleitorRepository eleitorDOA;
 		eleitorDOA.save(eleitor);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
-	//Metodo de validação se existe um eleitor pesquisado
+
+	// Metodo de validação se existe um eleitor pesquisado
 	private void verificaSeEleitorExiste(Long id) {
 		if (!eleitorDOA.findById(id).isPresent())
 			throw new ResourceNotFoundException("A eleição com ID: " + id + " não existe");
