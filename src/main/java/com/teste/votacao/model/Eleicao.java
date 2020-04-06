@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -27,12 +28,6 @@ public class Eleicao extends AbstractEntity {
 	@Basic
 	@NotNull
 	private Date fim;
-
-	@OneToMany
-	private Set<Cargo> cargo;
-
-	@OneToMany
-	private Set<Eleitor> eleitores;
 
 	// Getters e Setters
 	public String getNome() {
@@ -57,22 +52,6 @@ public class Eleicao extends AbstractEntity {
 
 	public void setFim(Date fim) {
 		this.fim = fim;
-	}
-
-	public Set<Cargo> getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(Set<Cargo> cargo) {
-		this.cargo = cargo;
-	}
-
-	public Set<Eleitor> getEleitores() {
-		return eleitores;
-	}
-
-	public void setEleitores(Set<Eleitor> eleitores) {
-		this.eleitores = eleitores;
 	}
 
 	@Override

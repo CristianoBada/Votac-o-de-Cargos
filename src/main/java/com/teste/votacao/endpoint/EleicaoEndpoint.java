@@ -56,10 +56,10 @@ public class EleicaoEndpoint {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(eleicaoComment.getId())
 				.toUri();
 		
-		return new ResponseEntity<Void>(HttpStatus.OK);
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 
-	@DeleteMapping("/eleicoes/{id}")
+	@DeleteMapping("/v1/eleicoes/{id}")
 	public ResponseEntity<?> deletar(@PathVariable Long id) {
 		verificaSeEleicaoExiste(id);
 		eleicaoDOA.deleteById(id);

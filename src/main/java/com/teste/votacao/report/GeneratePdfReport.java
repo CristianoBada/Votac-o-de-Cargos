@@ -32,11 +32,9 @@ public class GeneratePdfReport {
 			}
 
 			for (Eleicao e : eleicoes) {
-				document.add(new Paragraph(e.getNome()));
+				document.add(new Paragraph(e.getNome() + " Data inicio: " + e.getInicio() + " Data final: " + e.getFim()));
 
-				for (Cargo car : e.getCargo()) {
-					document.add(new Paragraph(car.getNome()));
-				}
+			
 			}
 
 			document.close();
