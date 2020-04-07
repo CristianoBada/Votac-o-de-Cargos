@@ -1,6 +1,7 @@
 package com.teste.votacao.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 
@@ -13,6 +14,7 @@ public class Cargo extends AbstractEntity {
 	private String nome;
 
 	@ManyToOne
+	@JoinColumn(name="eleicao_id")
 	private Eleicao eleicao;
 
 	public String getNome() {

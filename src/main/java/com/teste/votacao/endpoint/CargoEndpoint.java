@@ -45,6 +45,11 @@ public class CargoEndpoint {
 		Cargo cargo = cargoDOA.findById(id).get();
 		return new ResponseEntity<>(cargo, HttpStatus.OK);
 	}
+	
+	@GetMapping(path = "/v1/cargos/eleicoes/{id}")
+	public ResponseEntity<?> getCargosPorIdEleicoes(@PathVariable("id") Long id) {
+		return new ResponseEntity<>( cargoDOA.findByEleicao_id(id), HttpStatus.OK);
+	}
 
 	@PostMapping(path = "/v1/cargos")
 	@Transactional

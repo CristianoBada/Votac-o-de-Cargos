@@ -1,6 +1,7 @@
 package com.teste.votacao.model;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -24,6 +25,7 @@ public class Eleitor extends AbstractEntity {
 
 	@NotNull
 	@ManyToOne
+	@JoinColumn(name = "eleicao_id")
 	private Eleicao eleicao;
 
 	public String getNome() {
