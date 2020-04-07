@@ -51,10 +51,6 @@ public class CargoEndpoint {
 	public ResponseEntity<Void>  salvar(@Valid @RequestBody Cargo cargo) {	
 		cargo.setId(null);
 		
-		System.out.println(cargo.getId());
-		System.out.println(cargo.getNome());
-		System.out.println(cargo.getEleicao());
-		
 		Cargo cargoComment = cargoDOA.save(cargo);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cargoComment.getId())

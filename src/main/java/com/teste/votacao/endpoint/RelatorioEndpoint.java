@@ -1,7 +1,6 @@
 package com.teste.votacao.endpoint;
 
 import java.io.ByteArrayInputStream;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
